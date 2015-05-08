@@ -1,0 +1,13 @@
+#!/bin/bash
+
+EXPECTED_ARGS=1
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: `basename $0` [latex file WITHOUT extension] "
+  exit 1
+fi
+
+pdflatex ${1}.tex
+makeindex ${1}.nlo -s nomencl.ist -o ${1}.nls
+pdflatex ${1}.tex

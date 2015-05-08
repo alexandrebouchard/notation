@@ -1,0 +1,40 @@
+\documentclass[english]{article}%
+
+% Import the package:
+\usepackage{notation}
+
+% Optional: add this if you want the table of symbols
+\makenomenclature
+
+% Basic syntax: 
+%   1. Optional description used to generate table of notation 
+%      (if empty, this notation will not be included in the table of symbols,
+%      but will still be hyperlinked)
+%   2. Name of the notation macro (without the backslash)
+%   3. Value of the notation
+\notation[A small difference]{smallDiff}{\delta}
+
+% More advanced: if you want to override existing symbols, use a star (notation*),
+% and save the old value of the symbol to avoid infinite recursion during compilation
+\let\rawpi\pi
+\notation*[An important constant]{pi}{\rawpi}
+
+\begin{document}
+
+Here is my first macro: $\smallDiff$.
+
+Here is another one: \[\pi\].
+
+\newpage
+
+Here is my macro again, which is a link to the first occurrence above now: $\smallDiff$.
+
+Another link: $\pi$.
+
+% Pick a name for your list of symbols:
+\renewcommand{\nomname}{My list of Symbols}
+
+% Place the list of symbols here
+\printnomenclature 
+
+\end{document}
