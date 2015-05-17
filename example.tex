@@ -19,17 +19,24 @@
 \let\rawpi\pi
 \notation*[An important constant]{pi}{\rawpi}
 
+% Defining abbreviations:
+\abbreviation[A hidden Markov model]{HMM}{hidden Markov model}
+
 \begin{document}
 
-Here is my first macro: $\smallDiff$.
-
-Here is another one: \[\pi\].
+\begin{enumerate}
+  \item Here is my first macro: $\smallDiff$.
+  \item Here is another one: \[\pi\].
+  \item Here is an abbreviation: \HMM.
+\end{enumerate}
 
 \newpage
 
-Here is my macro again, which is a link to the first occurrence above now: $\smallDiff$.
-
-Another link: $\pi$.
+\begin{enumerate}
+  \item Here is my macro again, which is a link to the first occurrence above now: $\smallDiff$.
+  \item Another link: $\pi$.
+  \item Here is my abbreviation again: a \HMM, several \HMMs.
+\end{enumerate}
 
 % Pick a name for your list of symbols:
 \renewcommand{\nomname}{My list of Symbols}

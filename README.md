@@ -30,3 +30,24 @@ To save time, you can put the script ``makenotation.sh`` in your path and just t
 ```
 makenotation example
 ```
+
+
+Limitations
+===========
+
+- Does not seem to link into ``align`` environments, use ``equation``, ``\[ ... \]``, or ``eqnarray``
+- Does not link into a figure caption
+- If the package ``hyperref`` is already loaded with different options, you will get an error message saying you cannot load the package twice with different arguments. 
+
+Workaround for the ``hyperref`` issue: instead of e.g.
+
+```
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,filecolor=blue,backref=page]{hyperref}
+```
+
+use:
+
+```
+\usepackage{hyperref}
+\hypersetup{colorlinks,citecolor=blue,urlcolor=blue,filecolor=blue,backref=page}
+```
