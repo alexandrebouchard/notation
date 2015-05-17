@@ -1,7 +1,7 @@
 Latex macros for notation
 =========================
 
-Are you tired of chasing mathematical notation in published papers?
+Are you tired of chasing mathematical notation and abbreviations in published papers?
 
 Are you tired of conflicting or inconsistent notation?
 
@@ -15,9 +15,9 @@ This package addresses these problems via:
 Usage
 =====
 
-1. Copy the file ``notation.sty`` in you latex directory.
+1. Copy the file ``notation.sty`` in you latex directory, e.g. quickly but insecurely using ``wget https://raw.githubusercontent.com/alexandrebouchard/notation/master/notation.sty --no-check-certificate``.
 2. See ``example.tex`` for instructions and an example.
-3. To compile the example use:
+3. If you do not need a list of symbols, that's it, use your normal latex compilation pipeline. Otherwise, to ge the list of symbols, use:
 
 ```
 pdflatex example.tex 
@@ -35,8 +35,8 @@ makenotation example
 Limitations
 ===========
 
-- Does not seem to link into ``align`` environments, use ``equation``, ``\[ ... \]``, or ``eqnarray``
-- Does not link into a figure caption
+- Does not seem to link into ``align`` environments, use ``equation``, ``\[ ... \]``, or ``eqnarray``.
+- Does not link into a figure caption (but link *from* a caption is OK).
 - If the package ``hyperref`` is already loaded with different options, you will get an error message saying you cannot load the package twice with different arguments. 
 
 Workaround for the ``hyperref`` issue: instead of e.g.
