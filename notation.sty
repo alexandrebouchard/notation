@@ -18,6 +18,8 @@
 %
 % See README.md for more info and an example
 %
+% To disable links, define the command \disablenotationlinks
+%
 % Author: Alexandre Bouchard
 %%
 \makeatletter%
@@ -33,17 +35,21 @@
   }%
 }%
 \newcommand\processnotation[3]{%
-  \ifcsname checkifdefined#2\endcsname% Already defined: create a link
+  \ifcsname checkifdefined#2\endcsname% Already defined: create a link (if links not disabled!)
+    \ifcsname disablenotationlinks\endcsname%
+      {#3}%
+    \else%
       {\protect\hyperlink{#2}{\color{black}{#3}}}%
-    \else% First occurrence:
-      {\protect\Hy@raisedlink{\protect\hypertarget{#2}{}}{#3}}% Create a target
-      \expandafter\gdef\csname checkifdefined#2\endcsname{1}% Remember it was encountered
-      \def\temp{#1}\ifx\temp\empty%
-        \relax%
-      \else%
-        \nomenclature{\ensuremath{#3}}{#1}%
-      \fi%
     \fi%
+  \else% First occurrence:
+    {\protect\Hy@raisedlink{\protect\hypertarget{#2}{}}{#3}}% Create a target
+    \expandafter\gdef\csname checkifdefined#2\endcsname{1}% Remember it was encountered
+    \def\temp{#1}\ifx\temp\empty%
+      \relax%
+    \else%
+      \nomenclature{\ensuremath{#3}}{#1}%
+    \fi%
+  \fi%
 }%
 \makeatother%
 
