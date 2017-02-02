@@ -61,7 +61,7 @@
 %
 % #1: optional description used to add to the table of notation
 % #2: abbreviation (no space or special symbols allowed)
-% #3: value of the notation (added in parenthesis in the first occurrence)
+% #3: meaning of the abbreviation (added in parenthesis in the first occurrence)
 %
 % See README.md for more info and an example
 %
@@ -78,16 +78,56 @@
 }%
 \newcommand\processabbreviation[4]{%
   \ifcsname checkifdefined#2\endcsname% Already defined: create a link, and use the abbreviation
+    \ifcsname disablenotationlinks\endcsname%
+      {#2#4}%
+    \else%
       {\protect\hyperlink{#2}{\color{black}{#2#4}}}%
-    \else% First occurrence:
-      {\protect\Hy@raisedlink{\protect\hypertarget{#2}{}}{#3 (#2#4)}}% Create a target
-      \expandafter\gdef\csname checkifdefined#2\endcsname{1}% Remember it was encountered
-      \def\temp{#1}\ifx\temp\empty%
-        \relax%
-      \else%
-        \nomenclature{#2}{#1}%
-      \fi%
     \fi%
+  \else% First occurrence:
+    {\protect\Hy@raisedlink{\protect\hypertarget{#2}{}}{#3 (#2#4)}}% Create a target
+    \expandafter\gdef\csname checkifdefined#2\endcsname{1}% Remember it was encountered
+    \def\temp{#1}\ifx\temp\empty%
+      \relax%
+    \else%
+      \nomenclature{#2}{#1}%
+    \fi%
+  \fi%
+}%
+\makeatother%
+
+%%
+% terminology macro:
+%
+% Creates a terminology where the location of the first instance in the text is recorded as the 
+% anchor, and the subsequent usages link to this first anchor.
+%
+% #1: terminology code (no space or special symbols allowed)
+% #2: terminology plain text
+%
+% See README.md for more info and an example
+%
+% Author: Alexandre Bouchard
+%%
+\makeatletter%
+\newcommand\terminology[2]{% 
+  \expandafter\newcommand\csname #1\endcsname{%
+    \processterminology{#1}{#2}{}%
+  }%
+  \expandafter\newcommand\csname #1s\endcsname{%
+    \processterminology{#1}{#2}{s}%
+  }%
+}%
+\newcommand\processterminology[3]{%
+  \ifcsname checkifdefined#1\endcsname% Already defined: create a link, and use the abbreviation
+    \ifcsname disablenotationlinks\endcsname%
+      {#2#3}%
+    \else%
+      {\protect\hyperlink{#1}{\color{black}{#2#3}}}%
+    \fi%
+  \else% First occurrence:
+    {\protect\Hy@raisedlink{\protect\hypertarget{#1}{}}{#2#3}}% Create a target
+    \expandafter\gdef\csname checkifdefined#1\endcsname{1}% Remember it was encountered
+  \fi%
 }%
 \makeatother%
 
